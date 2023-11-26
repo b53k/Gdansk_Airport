@@ -1,9 +1,26 @@
 import os
-import subprocess
 import cv2
-import time
+import argparse
 
-def convert_mask_to_YOLO(input_dir, output_dir):
+# Code borrowed from https://github.com/computervisioneng/image-segmentation-yolov8/blob/main/masks_to_polygons.py
+
+def parse_arguments():
+    '''
+        Command Line Argument Parser
+    '''
+    parser = argparse.ArgumentParser('Convert mask to YOLO format')
+
+    # Arguments
+    parser.add_argument('--input_dir', type = str, default = './tmp/SegmentationObject', help = 'segmented images location')
+    parser.add_argument('--output_dir', type = str, default = './tmp/labels', help = 'specify output location')
+
+    args = parser.parse_args()
+    return args
+
+args = parse_arguments()
+
+
+def convert_mask_to_YOLO(args):
     '''
     Converts Segmentation masks 1.1 obtained from CVAT to YOLO v8 format
     
@@ -11,6 +28,8 @@ def convert_mask_to_YOLO(input_dir, output_dir):
         input_dir: str, location of segmented masks  '.../masks'
         output_dir: str, output location             '.../labels'
     '''
+    input_dir = args.input_dir
+    output_dir = args.output_dir
 
     for j in os.listdir(input_dir):
         image_path = os.path.join(input_dir, j)
@@ -24,7 +43,7 @@ def convert_mask_to_YOLO(input_dir, output_dir):
         # convert the contours to polygons
         polygons = []
         for cnt in contours:
-            if cv2.contourArea(cnt) > 200:
+            if cv2.contourArea(cnt) > 10:
                 polygon = []
                 for point in cnt:
                     x, y = point[0]
@@ -44,3 +63,5 @@ def convert_mask_to_YOLO(input_dir, output_dir):
                         f.write('{} '.format(p))
 
             f.close()
+
+convert_mask_to_YOLO(args)
