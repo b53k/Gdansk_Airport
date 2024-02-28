@@ -38,3 +38,7 @@ python3 capture_video.py --help
 | Date(YYYYMMDD) | Hour | Minute | Seconds | Time Normalized | Track ID | Obj Class | Centroid_x | Centroid_y | Temp (C) 2m | Humidity (%) 2m | Rain (mm) | Showers (mm) | Cloud Cover (%) |
 |----------------|------|--------|---------|-----------------|----------|-----------|------------|------------|-------------|-----------------|-----------|--------------|-----------------|
 
+---
+
+### ☑️: Get Contours From Masks
+`get_contours.py` makes a .txt file containing contours of the masks for each detected instance in an image.
