@@ -78,7 +78,7 @@ def annotate_image(image_path, model_weight):
                         max_area = area
                         max_index = j
 
-                largest_contour = contours[max_index] if max_index != 1 else None
+                largest_contour = contours[max_index] if max_index != -1 else None
             elif len(contours) == 1:
                 largest_contour = contours[0]
             else:
