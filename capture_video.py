@@ -150,6 +150,6 @@ if __name__ == '__main__':
 
     # You can set either of the URL's to None if you don't require capturing both live stream
     # e.g. url_dict = {pps3_url: 'PPS3, None: 'WestPier}
-    url_dict = {pps3_url: 'PPS3', westpier_url: 'WestPier'}
+    url_dict = {pps3_url: 'PPS3', None: 'WestPier'}
 
     record_stream(args, url_dict)
